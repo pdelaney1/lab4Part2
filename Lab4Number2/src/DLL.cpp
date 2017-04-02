@@ -10,12 +10,17 @@ DLL::DLL() {
 	size = 0;
 }
 DLL::DLL(int x) {
+	size = 0;
 	srand(time(NULL));
-	for (int i = 0; i < x; i++) {
-		if (i == 0) {
+	cout << x << endl;
+	cout << endl;
+	for (int g = 0; g < x; g++) {
+		if (g == 0) {
 			addFirst(rand() % 101);
+			cout << size << endl;
 		} else {
 			insertInOrder(rand() % 101);
+			cout << size << endl;
 		}
 	}
 }
@@ -30,15 +35,27 @@ DLL::~DLL() {
 	first = NULL;
 }
 void DLL::printDLL() {
-
+	DNode *tmp = first;
+	while(tmp != NULL){
+		cout << tmp->data << ", ";
+		tmp = tmp->next;
+	}
+	cout << endl;
 }
 void DLL::printReverse() {
-
+	DNode *tmp = last;
+	while(tmp != NULL){
+		cout << tmp->data << ", ";
+		tmp = tmp->prev;
+	}
+	cout << endl;
 }
 void DLL::addFirst(int x) {
 	DNode *tmp = new DNode(x);
 	tmp->next = NULL;
 	tmp->prev = NULL;
+	first = tmp;
+	last = first;
 	size += 1;
 }
 void DLL::addAtFront(int x) {
@@ -46,7 +63,7 @@ void DLL::addAtFront(int x) {
 	tmp->prev = NULL;
 	tmp->next = first;
 	first->prev = tmp;
-	last = first;
+	first = tmp;
 	size += 1;
 }
 void DLL::push(int x) {
